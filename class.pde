@@ -1,4 +1,4 @@
-//class sscube {
+class sscube {
 
 //float a, b, c, d;
 
@@ -23,4 +23,4 @@
 //}
 
 
-//}
+}
