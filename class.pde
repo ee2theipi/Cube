@@ -54,5 +54,3 @@ void ccube2(PVector vec){
     popMatrix();
 }
 
-
-}
