@@ -1,4 +1,4 @@
-class sscube {
+//class sscube {
 
 //float a, b, c, d;
 //this is an constructur (where an object is born)(its name must matchclass name)
@@ -345,28 +345,28 @@ void mcube12(PVector vect){
     popMatrix();
 }
 
-}
+//}
 
 
 void drawcube() {
-    b.ccube1(vectors[0]);
-    b.ccube2(vectors[2]);
-    b.ccube3(vectors[8]);
-    b.ccube4(vectors[6]);
-    b.mcube5(vectors[14]);
-    b.mcube7(vectors[16]);
-    b.mcube9(vectors[18]);
-    b.mcube10(vectors[19]);
-    b.ccube5(vectors[3]);
-    b.ccube6(vectors[1]);
-    b.ccube7(vectors[7]);
-    b.ccube8(vectors[4]);
-    b.mcube1(vectors[10]);
-    b.mcube2(vectors[11]);
-    b.mcube3(vectors[12]);
-    b.mcube4(vectors[13]);
-    b.mcube6(vectors[15]);
-    b.mcube8(vectors[17]);
-    b.mcube11(vectors[20]);
-    b.mcube12(vectors[21]); 
+        ccube1(vectors[0]);       
+        ccube2(vectors[1]);       
+        ccube3(vectors[2]);       
+        ccube4(vectors[3]); 
+        ccube5(vectors[4]);       
+        ccube6(vectors[5]);      
+        ccube7(vectors[6]);       
+        ccube8(vectors[7]); 
+        mcube1(vectors[8]);
+        mcube2(vectors[9]);
+        mcube3(vectors[10]);
+        mcube4(vectors[11]);
+        mcube5(vectors[12]);
+        mcube6(vectors[13]);
+        mcube7(vectors[14]);
+        mcube8(vectors[15]);
+        mcube9(vectors[16]);
+        mcube10(vectors[17]);
+        mcube11(vectors[18]);
+        mcube12(vectors[19]);     
 }
