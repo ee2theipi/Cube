@@ -29,17 +29,13 @@ PMatrix3D Matrixu;
 PMatrix3D Matrixd;
 
 
-IntList MoveF;
-IntList MoveB;
-IntList MoveL;
-IntList MoveR;
-IntList MoveU;
-IntList MoveD;
+IntList MoveF, MoveB, MoveL, MoveR, MoveU, MoveD;
+IntList leftMoveF, leftMoveB, leftMoveL, leftMoveR, leftMoveU, leftMoveD;
 //PMatrix3D inverseMatrix;
 float x = 0;
 int a = 76;
+int i;
 boolean F,B,L,R,U,D = false;
-
 PVector[] vectors = new PVector[20];
 PVector[] nvectors = new PVector[20];
 String[] funcNames = {"ccube1", "ccube2", "ccube3","ccube4", "ccube5", "ccube6","ccube7", "ccube8",
@@ -48,7 +44,7 @@ String[] funcNames = {"ccube1", "ccube2", "ccube3","ccube4", "ccube5", "ccube6",
 
 public void setup() {
     /* size commented out by preprocessor */; 
-    translate(width/2,height/2);
+    translate(width/2,height/2);  
       
     MatrixF = new PMatrix3D();
     MatrixB = new PMatrix3D();
@@ -113,85 +109,83 @@ public void setup() {
     background(155);
     strokeWeight(2);
 
-    if (U){
-      if (x <= 90){
+
+    if (F){
+        if (x <= 90){
         x = x + 3;
         pushMatrix();
-        rotateY(radians(x));
-      for (int value : MoveU) {
-        try {
-        this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
-      } catch (Exception e) {
-        e.printStackTrace();
+        rotate(radians(x));
+        for (int value : MoveF) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+          }
         }
-      }
-      
         popMatrix();
-        ccube5(vectors[4]);       
-        ccube6(vectors[5]);      
-        ccube7(vectors[6]);       
-        ccube8(vectors[7]); 
-        mcube1(vectors[8]);
-        mcube2(vectors[9]);
-        mcube3(vectors[10]);
-        mcube4(vectors[11]);
-        mcube6(vectors[13]);
-        mcube8(vectors[15]);
-        mcube11(vectors[18]);
-        mcube12(vectors[19]);
+        leftMoveF = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveF.hasValue(i)){
+            leftMoveF.append(i);
+          }  
+        }     
+        for (int value : leftMoveF) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+             } catch (Exception e) {
+              e.printStackTrace();
+            }
         }
-      else{
-        pushMatrix();
-        rotateY(radians(90));       
-          for (int value : MoveU) {
+
+        }
+        else{
+          pushMatrix();
+          rotate(radians(90));       
+          for (int value : MoveF) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
                 } catch (Exception e) {
                     e.printStackTrace();
             }
            } 
-        popMatrix();
-        ccube5(vectors[4]);       
-        ccube6(vectors[5]);      
-        ccube7(vectors[6]);       
-        ccube8(vectors[7]); 
-        mcube1(vectors[8]);
-        mcube2(vectors[9]);
-        mcube3(vectors[10]);
-        mcube4(vectors[11]);
-        mcube6(vectors[13]);
-        mcube8(vectors[15]);
-        mcube11(vectors[18]);
-        mcube12(vectors[19]); 
+          popMatrix();
+          for (int value : leftMoveF) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
         }
     }
-    
+
     else if (B){
         if (x <= 90){
         x = x + 3;
         pushMatrix();
         rotate(radians(x));
-      for (int value : MoveB) {
-    try {
-        this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-      }
-      
+        for (int value : MoveB) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+          }
+        }
         popMatrix();
-        ccube1(vectors[0]);       
-        ccube2(vectors[1]);
-        ccube5(vectors[4]);                    
-        ccube8(vectors[7]); 
-        mcube1(vectors[8]);
-        mcube2(vectors[9]);
-        mcube7(vectors[14]);
-        mcube8(vectors[15]);
-        mcube9(vectors[16]);
-        mcube10(vectors[17]);
-        mcube11(vectors[18]);
-        mcube12(vectors[19]);
+        leftMoveB = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveB.hasValue(i)){
+            leftMoveB.append(i);
+          }  
+        }     
+        for (int value : leftMoveB) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+             } catch (Exception e) {
+              e.printStackTrace();
+            }
+        }
+
         }
         else{
         pushMatrix();
@@ -204,41 +198,228 @@ public void setup() {
             }
            } 
         popMatrix();
-        ccube1(vectors[0]);       
-        ccube2(vectors[1]);
-        ccube5(vectors[4]);                   
-        ccube8(vectors[7]); 
-        mcube1(vectors[8]);
-        mcube2(vectors[9]);
-        mcube7(vectors[14]);
-        mcube8(vectors[15]);
-        mcube9(vectors[16]);
-        mcube10(vectors[17]);
-        mcube11(vectors[18]);
-        mcube12(vectors[19]); 
+        for (int value : leftMoveB) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+
         }
     }
     
-    else{
-     
-      for (int i = 0; i < funcNames.length; i++) {
-    try {
-        this.getClass().getMethod(funcNames[i], PVector.class).invoke(this, vectors[i]);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-      }
+    else if (L){
+        if (x <= 90){
+        x = x + 3;
+        pushMatrix();
+        rotateX(radians(x));
+        for (int value : MoveL) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+          }
+        }
+        popMatrix();
+        leftMoveL = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveL.hasValue(i)){
+            leftMoveL.append(i);
+          }  
+        }     
+        for (int value : leftMoveL) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+             } catch (Exception e) {
+              e.printStackTrace();
+            }
+        }
 
-      //drawcube();      
+        }
+        else{
+          pushMatrix();
+          rotateX(radians(90));       
+          for (int value : MoveL) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+            }
+           } 
+          popMatrix();
+          for (int value : leftMoveL) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+    }
+
+    else if (R){
+        if (x <= 90){
+        x = x + 3;
+        pushMatrix();
+        rotateX(radians(x));
+        for (int value : MoveR) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+          }
+        }
+        popMatrix();
+        leftMoveR = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveR.hasValue(i)){
+            leftMoveR.append(i);
+          }  
+        }     
+        for (int value : leftMoveR) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+             } catch (Exception e) {
+              e.printStackTrace();
+            }
+        }
+
+        }
+        else{
+          pushMatrix();
+          rotateX(radians(90));       
+          for (int value : MoveR) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+            }
+           } 
+          popMatrix();
+          for (int value : leftMoveR) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+    }
+
+    else if (U){
+        if (x <= 90){
+        x = x + 3;
+        pushMatrix();
+        rotateY(radians(x));
+      for (int value : MoveU) {
+        try {
+        this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+          } catch (Exception e) {
+            e.printStackTrace();
+        }
+      }
+      
+        popMatrix();
+        
+     //////////////////////////   
+        leftMoveU = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveU.hasValue(i)){
+            leftMoveU.append(i);
+          }  
+        }     
+        for (int value : leftMoveU) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+             } catch (Exception e) {
+              e.printStackTrace();
+            }
+        }
+        ///////////////////////
+        
+        }
+        else{
+        pushMatrix();
+        rotateY(radians(90));       
+          for (int value : MoveU) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+            }
+           } 
+        popMatrix();
+        for (int value : leftMoveU) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+             } catch (Exception e) {
+              e.printStackTrace();
+            }
+        }
+        }
+    }
+
+    else if (D){
+        if (x <= 90){
+        x = x + 3;
+        pushMatrix();
+        rotateY(radians(x));
+        for (int value : MoveD) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+          }
+        }
+        popMatrix();
+        leftMoveD = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveD.hasValue(i)){
+            leftMoveD.append(i);
+          }  
+        }     
+        for (int value : leftMoveD) {
+          try {
+            this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+             } catch (Exception e) {
+              e.printStackTrace();
+            }
+        }
+
+        }
+        else{
+          pushMatrix();
+          rotateY(radians(90));       
+          for (int value : MoveD) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+            }
+           } 
+          popMatrix();
+          for (int value : leftMoveD) {
+            try {
+              this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        }
+    }
+
+    else{
+      // draws cube in solved position 
+      for (int i = 0; i < funcNames.length; i++) {
+        try {
+          this.getClass().getMethod(funcNames[i], PVector.class).invoke(this, vectors[i]);
+        } catch (Exception e) {
+          e.printStackTrace();
+          }
+      }   
     }
   }
-
-        //PVector Nvectors = new PVector();
-        //vectors[0].x = MatrixU.m00 * vectors[0].x + MatrixU.m01 * vectors[0].y + MatrixU.m02 * vectors[0].z;
-        //vectors[0].y = MatrixU.m10 * vectors[0].x + MatrixU.m11 * vectors[0].y + MatrixU.m12 * vectors[0].z;
-        //vectors[0].z = MatrixU.m20 * vectors[0].x + MatrixU.m21 * vectors[0].y + MatrixU.m22 * vectors[0].z;
-        //println(vectors[0].x,vectors[0].y,vectors[0].z);
-        //println(Nvectors[0].x,Nvectors[0].y,Nvectors[0].z);
 //class sscube {
 
 //float a, b, c, d;
@@ -619,12 +800,12 @@ public void keyPressed(){
       if(nvectors[i].z > 25){
         MatrixF.mult(vectors[i], nvectors[i]);
         MoveF.append(i);
-        
         //println(i,nvectors[i].x,nvectors[i].y,nvectors[i].z, vectors[i].x, vectors[i].y, vectors[i].z);
       }
    }
    println(MoveF);
-    }    
+    }   
+
   else if (
     key == 'B'){
     B = true;
@@ -632,48 +813,43 @@ public void keyPressed(){
     for(int i = 0; i<20; i = i + 1){
       if(nvectors[i].z < -25){
         MatrixB.mult(vectors[i], nvectors[i]);
-        MoveB.append(i);
-        
-        //println(i,nvectors[i].x,nvectors[i].y,nvectors[i].z, vectors[i].x, vectors[i].y, vectors[i].z);
+        MoveB.append(i);    
       }
    }
    println(MoveB);
     }
+
   else if (key == 'L'){
     L = true;
     MoveL = new IntList();
     for(int i = 0; i<20; i = i + 1){
       if(nvectors[i].x < -25){
         MatrixL.mult(vectors[i], nvectors[i]);
-        MoveL.append(i);
-        
-        //println(i,nvectors[i].x,nvectors[i].y,nvectors[i].z, vectors[i].x, vectors[i].y, vectors[i].z);
+        MoveL.append(i);      
       }
    }
    println(MoveL);
     }
+
   else if (key == 'R'){
     R = true;
     MoveR = new IntList();
     for(int i = 0; i < 20; i = i + 1){
       if(nvectors[i].x > 25){
         MatrixR.mult(vectors[i], nvectors[i]);
-        MoveR.append(i);
-        
-        //println(i,nvectors[i].x,nvectors[i].y,nvectors[i].z, vectors[i].x, vectors[i].y, vectors[i].z);
+        MoveR.append(i);       
       }
    }
    println(MoveR);
     }
+
   else if (key == 'U'){
     U = true;
     MoveU = new IntList();
     for(int i = 0; i < 20; i = i + 1){
       if(nvectors[i].y < -25){
         MatrixU.mult(vectors[i], nvectors[i]);
-        MoveU.append(i);  
-        //println(i,nvectors[i].x,nvectors[i].y,nvectors[i].z, vectors[i].x, vectors[i].y, vectors[i].z);
-        
+        MoveU.append(i);            
     }
    }
    println(MoveU);  
@@ -685,7 +861,6 @@ public void keyPressed(){
       if(nvectors[i].y > 25){
         MatrixD.mult(vectors[i], nvectors[i]);
         MoveD.append(i);        
-        //println(i,nvectors[i].x,nvectors[i].y,nvectors[i].z, vectors[i].x, vectors[i].y, vectors[i].z);
       }
    }
    println(MoveD);
