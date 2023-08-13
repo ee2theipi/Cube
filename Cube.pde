@@ -14,7 +14,7 @@ PMatrix3D Matrixd;
 IntList MoveF, MoveB, MoveL, MoveR, MoveU, MoveD;
 IntList leftMoveF, leftMoveB, leftMoveL, leftMoveR, leftMoveU, leftMoveD;
 //PMatrix3D inverseMatrix;
-float x = 0;
+float x, countF, countB, countL, countR, countU, countD = 0;
 int a = 76;
 int i;
 boolean F,B,L,R,U,D = false;
@@ -92,8 +92,9 @@ void setup() {
     strokeWeight(2);
 
     if (F){
-        if (x <= 90){
-        x = x + 3;
+      
+        if (x <= 90*countF){
+        x = x + 5;
         pushMatrix();
         rotate(radians(x));
         for (int value : MoveF) {
@@ -121,7 +122,7 @@ void setup() {
         }
         else{
           pushMatrix();
-          rotate(radians(90));       
+          rotate(radians(90*countF));       
           for (int value : MoveF) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -130,6 +131,12 @@ void setup() {
             }
            } 
           popMatrix();
+          leftMoveF = new IntList();
+          for (i = 0; i<20; i++){
+            if (!MoveF.hasValue(i)){
+              leftMoveF.append(i);
+            }  
+          }
           for (int value : leftMoveF) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -138,11 +145,16 @@ void setup() {
             }
           }
         }
+        if(key == 'B' || key == 'L' || key == 'R' || key == 'U'|| key == 'D'){
+          F = false;
+          //x = 0;
+          countF = 0;
+        }
     }
 
     else if (B){
-        if (x <= 90){
-        x = x + 3;
+        if (x <= 90*countB){
+        x = x + 5;
         pushMatrix();
         rotate(radians(x));
         for (int value : MoveB) {
@@ -170,7 +182,7 @@ void setup() {
         }
         else{
         pushMatrix();
-        rotate(radians(90));       
+        rotate(radians(90*countB));       
           for (int value : MoveB) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -179,6 +191,13 @@ void setup() {
             }
            } 
         popMatrix();
+        leftMoveB = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveB.hasValue(i)){
+            leftMoveB.append(i);
+          }  
+        }
+
         for (int value : leftMoveB) {
           try {
             this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -188,11 +207,16 @@ void setup() {
         }
 
         }
+        if(key == 'F' || key == 'L' || key == 'R' || key == 'U'|| key == 'D'){
+          B = false;
+          //x = 0;
+          countB = 0;
+        }
     }
     
     else if (L){
-        if (x <= 90){
-        x = x + 3;
+        if (x <= 90*countL){
+        x = x + 5;
         pushMatrix();
         rotateX(radians(x));
         for (int value : MoveL) {
@@ -220,7 +244,7 @@ void setup() {
         }
         else{
           pushMatrix();
-          rotateX(radians(90));       
+          rotateX(radians(90*countL));       
           for (int value : MoveL) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -229,6 +253,12 @@ void setup() {
             }
            } 
           popMatrix();
+        leftMoveL = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveL.hasValue(i)){
+            leftMoveL.append(i);
+          }  
+        }
           for (int value : leftMoveL) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -237,11 +267,16 @@ void setup() {
             }
           }
         }
+        if(key == 'B' || key == 'F' || key == 'R' || key == 'U'|| key == 'D'){
+          L = false;
+          //x = 0;
+          countL = 0;
+        }
     }
 
     else if (R){
-        if (x <= 90){
-        x = x + 3;
+        if (x <= 90*countR){
+        x = x + 5;
         pushMatrix();
         rotateX(radians(x));
         for (int value : MoveR) {
@@ -269,7 +304,7 @@ void setup() {
         }
         else{
           pushMatrix();
-          rotateX(radians(90));       
+          rotateX(radians(90*countR));       
           for (int value : MoveR) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -278,6 +313,12 @@ void setup() {
             }
            } 
           popMatrix();
+          leftMoveR = new IntList();
+          for (i = 0; i<20; i++){
+          if (!MoveR.hasValue(i)){
+            leftMoveR.append(i);
+          }  
+        }
           for (int value : leftMoveR) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -286,10 +327,15 @@ void setup() {
             }
           }
         }
+        if(key == 'B' || key == 'L' || key == 'F' || key == 'U'|| key == 'D'){
+          R = false;
+          //x = 0;
+          countR = 0;
+        }
     }
 
     else if (U){
-        if (x <= 90){
+        if (x <= 90*countU){
         x = x + 3;
         pushMatrix();
         rotateY(radians(x));
@@ -322,7 +368,7 @@ void setup() {
         }
         else{
         pushMatrix();
-        rotateY(radians(90));       
+        rotateY(radians(90*countU));       
           for (int value : MoveU) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -331,6 +377,12 @@ void setup() {
             }
            } 
         popMatrix();
+        leftMoveU = new IntList();
+        for (i = 0; i<20; i++){
+          if (!MoveU.hasValue(i)){
+            leftMoveU.append(i);
+          }  
+        }
         for (int value : leftMoveU) {
           try {
             this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -339,11 +391,16 @@ void setup() {
             }
         }
         }
+        if(key == 'B' || key == 'L' || key == 'R' || key == 'F'|| key == 'D'){
+          U = false;
+          //x = 0;
+          countU = 0;
+        }
     }
 
     else if (D){
-        if (x <= 90){
-        x = x + 3;
+        if (x <= 90*countD){
+        x = x + 5;
         pushMatrix();
         rotateY(radians(x));
         for (int value : MoveD) {
@@ -371,7 +428,7 @@ void setup() {
         }
         else{
           pushMatrix();
-          rotateY(radians(90));       
+          rotateY(radians(90*countD));       
           for (int value : MoveD) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -380,6 +437,12 @@ void setup() {
             }
            } 
           popMatrix();
+          leftMoveD = new IntList();
+          for (i = 0; i<20; i++){
+            if (!MoveD.hasValue(i)){
+              leftMoveD.append(i);
+            }  
+          }
           for (int value : leftMoveD) {
             try {
               this.getClass().getMethod(funcNames[value], PVector.class).invoke(this, vectors[value]);
@@ -388,9 +451,14 @@ void setup() {
             }
           }
         }
+        if(key == 'B' || key == 'L' || key == 'R' || key == 'U'|| key == 'F'){
+          D = false;
+          //x = 0;
+          countD = 0;
+        }
     }
 
-    else{
+    else{ //else draw current position() instead of this drawcube() starting position 
       // draws cube in solved position 
       for (int i = 0; i < funcNames.length; i++) {
         try {
@@ -401,3 +469,15 @@ void setup() {
       }   
     }
   }
+
+
+  // TODO:
+  // 1) else case
+  // 2) check where vectors land after matrix multiplication
+
+  // alternatively instead of having FBLRUD boolean put the else if block in their respective keypressed (eliminates the problem of
+  // changing the boolean to true and false which is showing problems)
+  // Q.how to use keypressed in draw()
+
+  //**Generalise the vector input to ccube and mcube input 
+  
